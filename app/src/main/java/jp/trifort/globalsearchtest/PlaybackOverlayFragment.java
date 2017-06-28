@@ -99,11 +99,22 @@ public class PlaybackOverlayFragment extends android.support.v17.leanback.app.Pl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mItems = new ArrayList<Movie>();
-        mSelectedMovie = (Movie) getActivity()
-                .getIntent().getSerializableExtra(DetailsActivity.MOVIE);
-
+        mItems = new ArrayList<>();
         List<Movie> movies = MovieList.list;
+
+        if (Utils.hasGlobalSearchIntent(getActivity())) {
+            for (Movie movie : movies) {
+                String movieId = String.valueOf(movie.getId());
+                String episodeId = getActivity().getIntent().getData().getLastPathSegment();
+                if (movieId.equals(episodeId)) {
+                    mSelectedMovie = movie;
+                    break;
+                }
+            }
+        } else {
+            mSelectedMovie = (Movie) getActivity()
+                    .getIntent().getSerializableExtra(DetailsActivity.MOVIE);
+        }
 
         for (int j = 0; j < movies.size(); j++) {
             mItems.add(movies.get(j));

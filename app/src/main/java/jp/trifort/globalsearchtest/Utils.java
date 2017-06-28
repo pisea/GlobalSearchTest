@@ -14,7 +14,9 @@
 
 package jp.trifort.globalsearchtest;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.WindowManager;
@@ -88,4 +90,22 @@ public class Utils {
         }
         return result;
     }
+
+    /**
+     * Check if there is a global search intent. If there is, load that video.
+     */
+    public static boolean hasGlobalSearchIntent(Activity activity) {
+
+        Intent intent = activity.getIntent();
+        String intentAction = intent.getAction();
+        String globalSearch = activity.getString(R.string.global_search);
+
+        if (globalSearch.equalsIgnoreCase(intentAction)) {
+
+            return true;
+        }
+
+        return false;
+    }
+
 }

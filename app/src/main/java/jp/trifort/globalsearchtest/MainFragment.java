@@ -94,6 +94,10 @@ public class MainFragment extends BrowseFragment {
     private void loadRows() {
         List<Movie> list = MovieList.setupMovies();
 
+        for (Movie movie : list) {
+            VideoProvider.saveContentProvide(getActivity(), movie);
+        }
+
         mRowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
         CardPresenter cardPresenter = new CardPresenter();
 
