@@ -102,6 +102,10 @@ public class PlaybackOverlayFragment extends android.support.v17.leanback.app.Pl
         mItems = new ArrayList<>();
         List<Movie> movies = MovieList.list;
 
+        if (movies == null || movies.size() == 0) {
+           movies = MovieList.setupMovies();
+        }
+
         if (Utils.hasGlobalSearchIntent(getActivity())) {
             for (Movie movie : movies) {
                 String movieId = String.valueOf(movie.getId());
