@@ -12,7 +12,7 @@
  * the License.
  */
 
-package jp.trifort.globalsearchtest;
+package jp.trifort.globalsearchtest.view.activity;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -28,6 +28,10 @@ import android.widget.VideoView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+
+import jp.trifort.globalsearchtest.model.Movie;
+import jp.trifort.globalsearchtest.view.fragment.PlaybackOverlayFragment;
+import jp.trifort.globalsearchtest.R;
 
 /**
  * PlaybackOverlayActivity for video playback that loads PlaybackOverlayFragment

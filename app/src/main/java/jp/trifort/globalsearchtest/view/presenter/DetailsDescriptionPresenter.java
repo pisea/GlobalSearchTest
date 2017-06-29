@@ -12,25 +12,22 @@
  * the License.
  */
 
-package jp.trifort.globalsearchtest;
+package jp.trifort.globalsearchtest.view.presenter;
 
-import android.app.Activity;
-import android.os.Bundle;
+import android.support.v17.leanback.widget.AbstractDetailsDescriptionPresenter;
 
-/*
- * Details activity class that loads LeanbackDetailsFragment class
- */
-public class DetailsActivity extends Activity {
-    public static final String SHARED_ELEMENT_NAME = "hero";
-    public static final String MOVIE = "Movie";
+import jp.trifort.globalsearchtest.model.Movie;
 
-    /**
-     * Called when the activity is first created.
-     */
+public class DetailsDescriptionPresenter extends AbstractDetailsDescriptionPresenter {
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_details);
-    }
+    protected void onBindDescription(ViewHolder viewHolder, Object item) {
+        Movie movie = (Movie) item;
 
+        if (movie != null) {
+            viewHolder.getTitle().setText(movie.getTitle());
+            viewHolder.getSubtitle().setText(movie.getStudio());
+            viewHolder.getBody().setText(movie.getDescription());
+        }
+    }
 }

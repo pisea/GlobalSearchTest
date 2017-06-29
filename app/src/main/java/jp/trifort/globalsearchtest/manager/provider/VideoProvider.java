@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package jp.trifort.globalsearchtest;
+package jp.trifort.globalsearchtest.manager.provider;
 
 import android.app.SearchManager;
 import android.content.ContentProvider;
@@ -32,6 +32,12 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import jp.trifort.globalsearchtest.R;
+import jp.trifort.globalsearchtest.manager.VideoContract;
+import jp.trifort.globalsearchtest.manager.helper.VideoDbHelper;
+import jp.trifort.globalsearchtest.model.Movie;
+import jp.trifort.globalsearchtest.model.db.VideoEntry;
 
 
 /**
@@ -63,15 +69,15 @@ public class VideoProvider extends ContentProvider {
 
     static {
         sVideosContainingQueryBuilder = new SQLiteQueryBuilder();
-        sVideosContainingQueryBuilder.setTables(VideoContract.VideoEntry.TABLE_NAME);
+        sVideosContainingQueryBuilder.setTables(VideoEntry.TABLE_NAME);
         sVideosContainingQueryBuilder.setProjectionMap(sColumnMap);
         sVideosContainingQueryColumns = new String[]{
-                VideoContract.VideoEntry._ID,
-                VideoContract.VideoEntry.COLUMN_ID,
-                VideoContract.VideoEntry.COLUMN_TITLE,
-                VideoContract.VideoEntry.COLUMN_STUDIO,
-                VideoContract.VideoEntry.COLUMN_CARD_IMG,
-                VideoContract.VideoEntry.COLUMN_ACTION,
+                VideoEntry._ID,
+                VideoEntry.COLUMN_ID,
+                VideoEntry.COLUMN_TITLE,
+                VideoEntry.COLUMN_STUDIO,
+                VideoEntry.COLUMN_CARD_IMG,
+                VideoEntry.COLUMN_ACTION,
                 SearchManager.SUGGEST_COLUMN_INTENT_DATA_ID
         };
     }
@@ -95,7 +101,7 @@ public class VideoProvider extends ContentProvider {
         return sVideosContainingQueryBuilder.query(
                 mOpenHelper.getReadableDatabase(),
                 sVideosContainingQueryColumns,
-                VideoContract.VideoEntry.COLUMN_TITLE + " LIKE '%" + query + "%'",
+                VideoEntry.COLUMN_TITLE + " LIKE '%" + query + "%'",
                 null,
                 null,
                 null,
@@ -105,16 +111,16 @@ public class VideoProvider extends ContentProvider {
 
     private static HashMap<String, String> buildColumnMap() {
         HashMap<String, String> map = new HashMap<>();
-        map.put(VideoContract.VideoEntry._ID, VideoContract.VideoEntry._ID);
-        map.put(VideoContract.VideoEntry.COLUMN_ID, VideoContract.VideoEntry.COLUMN_ID);
-        map.put(VideoContract.VideoEntry.COLUMN_TITLE, VideoContract.VideoEntry.COLUMN_TITLE);
-        map.put(VideoContract.VideoEntry.COLUMN_STUDIO, VideoContract.VideoEntry.COLUMN_STUDIO);
-        map.put(VideoContract.VideoEntry.COLUMN_CARD_IMG, VideoContract.VideoEntry.COLUMN_CARD_IMG);
-        map.put(VideoContract.VideoEntry.COLUMN_ACTION, VideoContract.VideoEntry.COLUMN_ACTION);
-        map.put(SearchManager.SUGGEST_COLUMN_INTENT_DATA_ID, VideoContract.VideoEntry.COLUMN_ID + " AS " +
+        map.put(VideoEntry._ID, VideoEntry._ID);
+        map.put(VideoEntry.COLUMN_ID, VideoEntry.COLUMN_ID);
+        map.put(VideoEntry.COLUMN_TITLE, VideoEntry.COLUMN_TITLE);
+        map.put(VideoEntry.COLUMN_STUDIO, VideoEntry.COLUMN_STUDIO);
+        map.put(VideoEntry.COLUMN_CARD_IMG, VideoEntry.COLUMN_CARD_IMG);
+        map.put(VideoEntry.COLUMN_ACTION, VideoEntry.COLUMN_ACTION);
+        map.put(SearchManager.SUGGEST_COLUMN_INTENT_DATA_ID, VideoEntry.COLUMN_ID + " AS " +
                 SearchManager.SUGGEST_COLUMN_INTENT_DATA_ID);
         map.put(SearchManager.SUGGEST_COLUMN_SHORTCUT_ID,
-                VideoContract.VideoEntry.COLUMN_ID + " AS " + SearchManager.SUGGEST_COLUMN_SHORTCUT_ID);
+                VideoEntry.COLUMN_ID + " AS " + SearchManager.SUGGEST_COLUMN_SHORTCUT_ID);
         return map;
     }
 
@@ -133,7 +139,7 @@ public class VideoProvider extends ContentProvider {
             }
             case VIDEO: {
                 retCursor = mOpenHelper.getReadableDatabase().query(
-                        VideoContract.VideoEntry.TABLE_NAME,
+                        VideoEntry.TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
@@ -157,9 +163,9 @@ public class VideoProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             // The application is querying the db for its own contents.
             case VIDEO_WITH_CATEGORY:
-                return VideoContract.VideoEntry.CONTENT_TYPE;
+                return VideoEntry.CONTENT_TYPE;
             case VIDEO:
-                return VideoContract.VideoEntry.CONTENT_TYPE;
+                return VideoEntry.CONTENT_TYPE;
 
             // The Android TV global search is querying our app for relevant content.
             case SEARCH_SUGGEST:
@@ -181,9 +187,9 @@ public class VideoProvider extends ContentProvider {
         switch (match) {
             case VIDEO: {
                 long _id = mOpenHelper.getWritableDatabase().insert(
-                        VideoContract.VideoEntry.TABLE_NAME, null, values);
+                        VideoEntry.TABLE_NAME, null, values);
                 if (_id > 0) {
-                    returnUri = VideoContract.VideoEntry.buildVideoUri(_id);
+                    returnUri = VideoEntry.buildVideoUri(_id);
                 } else {
                     throw new SQLException("Failed to insert row into " + uri);
                 }
@@ -209,7 +215,7 @@ public class VideoProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             case VIDEO: {
                 rowsDeleted = mOpenHelper.getWritableDatabase().delete(
-                        VideoContract.VideoEntry.TABLE_NAME, selection, selectionArgs);
+                        VideoEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             }
             default: {
@@ -232,7 +238,7 @@ public class VideoProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             case VIDEO: {
                 rowsUpdated = mOpenHelper.getWritableDatabase().update(
-                        VideoContract.VideoEntry.TABLE_NAME, values, selection, selectionArgs);
+                        VideoEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             }
             default: {
@@ -256,10 +262,10 @@ public class VideoProvider extends ContentProvider {
                 SQLiteDatabase db = mOpenHelper.getReadableDatabase();
 
                 for (ContentValues value : values) {
-                    Cursor cursor = db.query(VideoContract.VideoEntry.TABLE_NAME,
-                            new String[]{VideoContract.VideoEntry.COLUMN_ID},
-                            VideoContract.VideoEntry.COLUMN_ID + " = ? ",
-                            new String[]{value.getAsString(VideoContract.VideoEntry.COLUMN_ID)}, null, null, null, null);
+                    Cursor cursor = db.query(VideoEntry.TABLE_NAME,
+                            new String[]{VideoEntry.COLUMN_ID},
+                            VideoEntry.COLUMN_ID + " = ? ",
+                            new String[]{value.getAsString(VideoEntry.COLUMN_ID)}, null, null, null, null);
                     if (cursor.getCount() < 1) {
                         tempValues.add(value);
                     }
@@ -274,7 +280,7 @@ public class VideoProvider extends ContentProvider {
 
                 try {
                     for (ContentValues value : tempValues) {
-                        long _id = db.insertWithOnConflict(VideoContract.VideoEntry.TABLE_NAME,
+                        long _id = db.insertWithOnConflict(VideoEntry.TABLE_NAME,
                                 null, value, SQLiteDatabase.CONFLICT_REPLACE);
                         if (_id != -1) {
                             returnCount++;
@@ -305,21 +311,21 @@ public class VideoProvider extends ContentProvider {
 
             Movie movie = (Movie) item;
 
-            videoValues.put(VideoContract.VideoEntry.COLUMN_ID, movie.getId());
-            videoValues.put(VideoContract.VideoEntry.COLUMN_TITLE, movie.getTitle());
-            videoValues.put(VideoContract.VideoEntry.COLUMN_STUDIO, movie.getStudio());
-            videoValues.put(VideoContract.VideoEntry.COLUMN_CARD_IMG, movie.getCardImageUrl());
+            videoValues.put(VideoEntry.COLUMN_ID, movie.getId());
+            videoValues.put(VideoEntry.COLUMN_TITLE, movie.getTitle());
+            videoValues.put(VideoEntry.COLUMN_STUDIO, movie.getStudio());
+            videoValues.put(VideoEntry.COLUMN_CARD_IMG, movie.getCardImageUrl());
 
         }
 
-        videoValues.put(VideoContract.VideoEntry.COLUMN_ACTION,
+        videoValues.put(VideoEntry.COLUMN_ACTION,
                 context.getResources().getString(R.string.global_search));
 
         List<ContentValues> contentValuesList = new ArrayList<>();
         contentValuesList.add(videoValues);
 
         ContentValues[] downloadedVideoContentValues = contentValuesList.toArray(new ContentValues[contentValuesList.size()]);
-        context.getContentResolver().bulkInsert(VideoContract.VideoEntry.CONTENT_URI, downloadedVideoContentValues);
+        context.getContentResolver().bulkInsert(VideoEntry.CONTENT_URI, downloadedVideoContentValues);
 
     }
 }

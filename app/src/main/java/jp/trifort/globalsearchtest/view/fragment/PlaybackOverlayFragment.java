@@ -12,7 +12,7 @@
  * the License.
  */
 
-package jp.trifort.globalsearchtest;
+package jp.trifort.globalsearchtest.view.fragment;
 
 import android.app.Activity;
 
@@ -56,6 +56,13 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import jp.trifort.globalsearchtest.view.presenter.CardPresenter;
+import jp.trifort.globalsearchtest.model.Movie;
+import jp.trifort.globalsearchtest.model.MovieList;
+import jp.trifort.globalsearchtest.R;
+import jp.trifort.globalsearchtest.util.CommonUtil;
+import jp.trifort.globalsearchtest.view.activity.DetailsActivity;
 
 /*
  * Class for video playback with media control
@@ -106,7 +113,7 @@ public class PlaybackOverlayFragment extends android.support.v17.leanback.app.Pl
            movies = MovieList.setupMovies();
         }
 
-        if (Utils.hasGlobalSearchIntent(getActivity())) {
+        if (CommonUtil.hasGlobalSearchIntent(getActivity())) {
             for (Movie movie : movies) {
                 String movieId = String.valueOf(movie.getId());
                 String episodeId = getActivity().getIntent().getData().getLastPathSegment();

@@ -12,7 +12,7 @@
  * the License.
  */
 
-package jp.trifort.globalsearchtest;
+package jp.trifort.globalsearchtest.view.fragment;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -45,6 +45,16 @@ import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.Collections;
 import java.util.List;
+
+import jp.trifort.globalsearchtest.view.presenter.CardPresenter;
+import jp.trifort.globalsearchtest.view.presenter.DetailsDescriptionPresenter;
+import jp.trifort.globalsearchtest.model.Movie;
+import jp.trifort.globalsearchtest.model.MovieList;
+import jp.trifort.globalsearchtest.R;
+import jp.trifort.globalsearchtest.util.CommonUtil;
+import jp.trifort.globalsearchtest.view.activity.DetailsActivity;
+import jp.trifort.globalsearchtest.view.activity.MainActivity;
+import jp.trifort.globalsearchtest.view.activity.PlaybackOverlayActivity;
 
 /*
  * LeanbackDetailsFragment extends DetailsFragment, a Wrapper fragment for leanback details screens.
@@ -131,9 +141,9 @@ public class VideoDetailsFragment extends DetailsFragment {
         Log.d(TAG, "doInBackground: " + mSelectedMovie.toString());
         final DetailsOverviewRow row = new DetailsOverviewRow(mSelectedMovie);
         row.setImageDrawable(getResources().getDrawable(R.drawable.default_background));
-        int width = Utils.convertDpToPixel(getActivity()
+        int width = CommonUtil.convertDpToPixel(getActivity()
                 .getApplicationContext(), DETAIL_THUMB_WIDTH);
-        int height = Utils.convertDpToPixel(getActivity()
+        int height = CommonUtil.convertDpToPixel(getActivity()
                 .getApplicationContext(), DETAIL_THUMB_HEIGHT);
         Glide.with(getActivity())
                 .load(mSelectedMovie.getCardImageUrl())

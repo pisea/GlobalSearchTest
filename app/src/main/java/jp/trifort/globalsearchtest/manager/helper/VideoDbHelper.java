@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package jp.trifort.globalsearchtest;
+package jp.trifort.globalsearchtest.manager.helper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import jp.trifort.globalsearchtest.VideoContract.VideoEntry;
+import jp.trifort.globalsearchtest.model.db.VideoEntry;
 
 /**
  * VideoDbHelper manages the creation and upgrade of the database used in this sample.

@@ -11,11 +11,13 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package jp.trifort.globalsearchtest;
+package jp.trifort.globalsearchtest.view.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+
+import jp.trifort.globalsearchtest.R;
 
 /*
  * This class demonstrates how to extend ErrorFragment

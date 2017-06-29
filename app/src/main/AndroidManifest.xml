@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Leanback">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activity.MainActivity"
             android:banner="@drawable/app_icon_your_company"
             android:icon="@drawable/app_icon_your_company"
             android:label="@string/app_name"
@@ -31,8 +31,8 @@
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailsActivity" />
-        <activity android:name=".PlaybackOverlayActivity">
+        <activity android:name=".view.activity.DetailsActivity" />
+        <activity android:name=".view.activity.PlaybackOverlayActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
@@ -43,10 +43,10 @@
                 android:resource="@xml/searchable"/>
 
         </activity>
-        <activity android:name=".BrowseErrorActivity" />
+        <activity android:name=".view.activity.BrowseErrorActivity" />
 
         <provider
-            android:name=".VideoProvider"
+            android:name=".manager.provider.VideoProvider"
             android:authorities="${packageName}"
             android:exported="true">
             <path-permission

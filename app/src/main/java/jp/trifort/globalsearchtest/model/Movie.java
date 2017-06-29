@@ -12,7 +12,7 @@
  * the License.
  */
 
-package jp.trifort.globalsearchtest;
+package jp.trifort.globalsearchtest.model;
 
 import android.util.Log;
 

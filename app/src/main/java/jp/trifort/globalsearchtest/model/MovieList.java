@@ -1,4 +1,4 @@
-package jp.trifort.globalsearchtest;
+package jp.trifort.globalsearchtest.model;
 
 import java.util.ArrayList;
 import java.util.List;

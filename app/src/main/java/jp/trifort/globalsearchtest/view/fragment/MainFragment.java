@@ -12,7 +12,7 @@
  * the License.
  */
 
-package jp.trifort.globalsearchtest;
+package jp.trifort.globalsearchtest.view.fragment;
 
 import java.net.URI;
 import java.util.Collections;
@@ -50,6 +50,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+
+import jp.trifort.globalsearchtest.view.presenter.CardPresenter;
+import jp.trifort.globalsearchtest.model.Movie;
+import jp.trifort.globalsearchtest.model.MovieList;
+import jp.trifort.globalsearchtest.R;
+import jp.trifort.globalsearchtest.manager.provider.VideoProvider;
+import jp.trifort.globalsearchtest.view.activity.BrowseErrorActivity;
+import jp.trifort.globalsearchtest.view.activity.DetailsActivity;
 
 public class MainFragment extends BrowseFragment {
     private static final String TAG = "MainFragment";

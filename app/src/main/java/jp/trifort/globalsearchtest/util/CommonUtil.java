@@ -12,7 +12,7 @@
  * the License.
  */
 
-package jp.trifort.globalsearchtest;
+package jp.trifort.globalsearchtest.util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,15 +22,17 @@ import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import jp.trifort.globalsearchtest.R;
+
 /**
  * A collection of utility methods, all static.
  */
-public class Utils {
+public class CommonUtil {
 
     /*
      * Making sure public utility methods remain static
      */
-    private Utils() {
+    private CommonUtil() {
     }
 
     /**
