@@ -15,7 +15,6 @@
 package jp.trifort.globalsearchtest.view.fragment;
 
 import android.app.Activity;
-
 import android.media.MediaMetadataRetriever;
 import android.os.Build;
 import android.os.Bundle;
@@ -57,12 +56,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import jp.trifort.globalsearchtest.view.presenter.CardPresenter;
+import jp.trifort.globalsearchtest.R;
 import jp.trifort.globalsearchtest.model.Movie;
 import jp.trifort.globalsearchtest.model.MovieList;
-import jp.trifort.globalsearchtest.R;
 import jp.trifort.globalsearchtest.util.CommonUtil;
 import jp.trifort.globalsearchtest.view.activity.DetailsActivity;
+import jp.trifort.globalsearchtest.view.presenter.CardPresenter;
 
 /*
  * Class for video playback with media control

@@ -24,8 +24,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
-import jp.trifort.globalsearchtest.view.fragment.ErrorFragment;
 import jp.trifort.globalsearchtest.R;
+import jp.trifort.globalsearchtest.view.fragment.ErrorFragment;
 
 /*
  * BrowseErrorActivity shows how to use ErrorFragment

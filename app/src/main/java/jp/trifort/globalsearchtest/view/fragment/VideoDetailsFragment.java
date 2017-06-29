@@ -46,15 +46,15 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import java.util.Collections;
 import java.util.List;
 
-import jp.trifort.globalsearchtest.view.presenter.CardPresenter;
-import jp.trifort.globalsearchtest.view.presenter.DetailsDescriptionPresenter;
+import jp.trifort.globalsearchtest.R;
 import jp.trifort.globalsearchtest.model.Movie;
 import jp.trifort.globalsearchtest.model.MovieList;
-import jp.trifort.globalsearchtest.R;
 import jp.trifort.globalsearchtest.util.CommonUtil;
 import jp.trifort.globalsearchtest.view.activity.DetailsActivity;
 import jp.trifort.globalsearchtest.view.activity.MainActivity;
 import jp.trifort.globalsearchtest.view.activity.PlaybackOverlayActivity;
+import jp.trifort.globalsearchtest.view.presenter.CardPresenter;
+import jp.trifort.globalsearchtest.view.presenter.DetailsDescriptionPresenter;
 
 /*
  * LeanbackDetailsFragment extends DetailsFragment, a Wrapper fragment for leanback details screens.

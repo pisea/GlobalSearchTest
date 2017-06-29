@@ -38,6 +38,7 @@ import jp.trifort.globalsearchtest.manager.VideoContract;
 import jp.trifort.globalsearchtest.manager.helper.VideoDbHelper;
 import jp.trifort.globalsearchtest.model.Movie;
 import jp.trifort.globalsearchtest.model.db.VideoEntry;
+import jp.trifort.globalsearchtest.util.CommonUtil;
 
 
 /**
@@ -163,9 +164,9 @@ public class VideoProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             // The application is querying the db for its own contents.
             case VIDEO_WITH_CATEGORY:
-                return VideoEntry.CONTENT_TYPE;
+                return VideoContract.CONTENT_TYPE;
             case VIDEO:
-                return VideoEntry.CONTENT_TYPE;
+                return VideoContract.CONTENT_TYPE;
 
             // The Android TV global search is querying our app for relevant content.
             case SEARCH_SUGGEST:
@@ -189,7 +190,7 @@ public class VideoProvider extends ContentProvider {
                 long _id = mOpenHelper.getWritableDatabase().insert(
                         VideoEntry.TABLE_NAME, null, values);
                 if (_id > 0) {
-                    returnUri = VideoEntry.buildVideoUri(_id);
+                    returnUri = CommonUtil.buildVideoUri(_id);
                 } else {
                     throw new SQLException("Failed to insert row into " + uri);
                 }
@@ -325,7 +326,7 @@ public class VideoProvider extends ContentProvider {
         contentValuesList.add(videoValues);
 
         ContentValues[] downloadedVideoContentValues = contentValuesList.toArray(new ContentValues[contentValuesList.size()]);
-        context.getContentResolver().bulkInsert(VideoEntry.CONTENT_URI, downloadedVideoContentValues);
+        context.getContentResolver().bulkInsert(VideoContract.CONTENT_URI, downloadedVideoContentValues);
 
     }
 }

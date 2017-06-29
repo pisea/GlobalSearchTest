@@ -16,11 +16,8 @@
 
 package jp.trifort.globalsearchtest.manager;
 
-import android.app.SearchManager;
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.net.Uri;
-import android.provider.BaseColumns;
 
 /**
  * VideoContract represents the contract for storing videos in the SQLite database.
@@ -36,4 +33,9 @@ public final class VideoContract {
     // The content paths.
     public static final String PATH_VIDEO = "video";
 
+    public static final Uri CONTENT_URI =
+            BASE_CONTENT_URI.buildUpon().appendPath(PATH_VIDEO).build();
+
+    public static final String CONTENT_TYPE =
+            ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "." + PATH_VIDEO;
 }

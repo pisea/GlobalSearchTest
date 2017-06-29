@@ -29,9 +29,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 
+import jp.trifort.globalsearchtest.R;
 import jp.trifort.globalsearchtest.model.Movie;
 import jp.trifort.globalsearchtest.view.fragment.PlaybackOverlayFragment;
-import jp.trifort.globalsearchtest.R;
 
 /**
  * PlaybackOverlayActivity for video playback that loads PlaybackOverlayFragment

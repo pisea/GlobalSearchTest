@@ -15,14 +15,17 @@
 package jp.trifort.globalsearchtest.util;
 
 import android.app.Activity;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.net.Uri;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import jp.trifort.globalsearchtest.R;
+import jp.trifort.globalsearchtest.manager.VideoContract;
 
 /**
  * A collection of utility methods, all static.
@@ -110,4 +113,8 @@ public class CommonUtil {
         return false;
     }
 
+    // Returns the Uri referencing a video with the specified id.
+    public static Uri buildVideoUri(long id) {
+        return ContentUris.withAppendedId(VideoContract.CONTENT_URI, id);
+    }
 }
