@@ -19,6 +19,7 @@ package jp.trifort.globalsearchtest.manager.provider;
 import android.app.SearchManager;
 import android.content.ContentProvider;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
@@ -191,7 +192,7 @@ public class VideoProvider extends ContentProvider {
                 long _id = mOpenHelper.getWritableDatabase().insert(
                         VideoDbHelper.TABLE_NAME, null, values);
                 if (_id > 0) {
-                    returnUri = ProviderUtil.buildVideoUri(_id);
+                    returnUri = ContentUris.withAppendedId(VideoContract.CONTENT_URI, _id);
                 } else {
                     throw new SQLException("Failed to insert row into " + uri);
                 }
@@ -203,6 +204,7 @@ public class VideoProvider extends ContentProvider {
         }
 
         mContentResolver.notifyChange(uri, null);
+
         return returnUri;
     }
 

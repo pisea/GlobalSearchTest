@@ -38,11 +38,6 @@ public class ProviderUtil {
         return false;
     }
 
-    // Returns the Uri referencing a video with the specified id.
-    public static Uri buildVideoUri(long id) {
-        return ContentUris.withAppendedId(VideoContract.CONTENT_URI, id);
-    }
-
     public static void saveContentProvide(Context context, Object item) {
 
         ContentValues videoValues = new ContentValues();
