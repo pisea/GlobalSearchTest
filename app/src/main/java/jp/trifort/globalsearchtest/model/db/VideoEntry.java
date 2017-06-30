@@ -9,9 +9,6 @@ import android.provider.BaseColumns;
 
 public final class VideoEntry implements BaseColumns {
 
-    // Name of the video table.
-    public static final String TABLE_NAME = "video";
-
     // Name of the video.
     public static final String COLUMN_ID = "episode_id";
 

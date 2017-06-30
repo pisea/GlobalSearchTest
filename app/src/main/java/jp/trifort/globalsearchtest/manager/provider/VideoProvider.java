@@ -70,7 +70,7 @@ public class VideoProvider extends ContentProvider {
 
     static {
         sVideosContainingQueryBuilder = new SQLiteQueryBuilder();
-        sVideosContainingQueryBuilder.setTables(VideoEntry.TABLE_NAME);
+        sVideosContainingQueryBuilder.setTables(VideoDbHelper.TABLE_NAME);
         sVideosContainingQueryBuilder.setProjectionMap(sColumnMap);
         sVideosContainingQueryColumns = new String[]{
                 VideoEntry._ID,
@@ -140,7 +140,7 @@ public class VideoProvider extends ContentProvider {
             }
             case VIDEO: {
                 retCursor = mOpenHelper.getReadableDatabase().query(
-                        VideoEntry.TABLE_NAME,
+                        VideoDbHelper.TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
@@ -188,7 +188,7 @@ public class VideoProvider extends ContentProvider {
         switch (match) {
             case VIDEO: {
                 long _id = mOpenHelper.getWritableDatabase().insert(
-                        VideoEntry.TABLE_NAME, null, values);
+                        VideoDbHelper.TABLE_NAME, null, values);
                 if (_id > 0) {
                     returnUri = CommonUtil.buildVideoUri(_id);
                 } else {
@@ -216,7 +216,7 @@ public class VideoProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             case VIDEO: {
                 rowsDeleted = mOpenHelper.getWritableDatabase().delete(
-                        VideoEntry.TABLE_NAME, selection, selectionArgs);
+                        VideoDbHelper.TABLE_NAME, selection, selectionArgs);
                 break;
             }
             default: {
@@ -239,7 +239,7 @@ public class VideoProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             case VIDEO: {
                 rowsUpdated = mOpenHelper.getWritableDatabase().update(
-                        VideoEntry.TABLE_NAME, values, selection, selectionArgs);
+                        VideoDbHelper.TABLE_NAME, values, selection, selectionArgs);
                 break;
             }
             default: {
@@ -263,7 +263,7 @@ public class VideoProvider extends ContentProvider {
                 SQLiteDatabase db = mOpenHelper.getReadableDatabase();
 
                 for (ContentValues value : values) {
-                    Cursor cursor = db.query(VideoEntry.TABLE_NAME,
+                    Cursor cursor = db.query(VideoDbHelper.TABLE_NAME,
                             new String[]{VideoEntry.COLUMN_ID},
                             VideoEntry.COLUMN_ID + " = ? ",
                             new String[]{value.getAsString(VideoEntry.COLUMN_ID)}, null, null, null, null);
@@ -281,7 +281,7 @@ public class VideoProvider extends ContentProvider {
 
                 try {
                     for (ContentValues value : tempValues) {
-                        long _id = db.insertWithOnConflict(VideoEntry.TABLE_NAME,
+                        long _id = db.insertWithOnConflict(VideoDbHelper.TABLE_NAME,
                                 null, value, SQLiteDatabase.CONFLICT_REPLACE);
                         if (_id != -1) {
                             returnCount++;

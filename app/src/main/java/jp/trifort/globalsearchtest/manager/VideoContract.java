@@ -19,9 +19,6 @@ package jp.trifort.globalsearchtest.manager;
 import android.content.ContentResolver;
 import android.net.Uri;
 
-/**
- * VideoContract represents the contract for storing videos in the SQLite database.
- */
 public final class VideoContract {
 
     // The name for the entire content provider.
