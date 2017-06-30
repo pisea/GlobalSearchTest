@@ -39,6 +39,7 @@ import jp.trifort.globalsearchtest.manager.helper.VideoDbHelper;
 import jp.trifort.globalsearchtest.model.Movie;
 import jp.trifort.globalsearchtest.model.db.VideoEntry;
 import jp.trifort.globalsearchtest.util.CommonUtil;
+import jp.trifort.globalsearchtest.util.ProviderUtil;
 
 
 /**
@@ -190,7 +191,7 @@ public class VideoProvider extends ContentProvider {
                 long _id = mOpenHelper.getWritableDatabase().insert(
                         VideoDbHelper.TABLE_NAME, null, values);
                 if (_id > 0) {
-                    returnUri = CommonUtil.buildVideoUri(_id);
+                    returnUri = ProviderUtil.buildVideoUri(_id);
                 } else {
                     throw new SQLException("Failed to insert row into " + uri);
                 }
@@ -303,30 +304,4 @@ public class VideoProvider extends ContentProvider {
         }
     }
 
-
-    public static void saveContentProvide(Context context, Object item) {
-
-        ContentValues videoValues = new ContentValues();
-
-        if (item instanceof Movie) {
-
-            Movie movie = (Movie) item;
-
-            videoValues.put(VideoEntry.COLUMN_ID, movie.getId());
-            videoValues.put(VideoEntry.COLUMN_TITLE, movie.getTitle());
-            videoValues.put(VideoEntry.COLUMN_STUDIO, movie.getStudio());
-            videoValues.put(VideoEntry.COLUMN_CARD_IMG, movie.getCardImageUrl());
-
-        }
-
-        videoValues.put(VideoEntry.COLUMN_ACTION,
-                context.getResources().getString(R.string.global_search));
-
-        List<ContentValues> contentValuesList = new ArrayList<>();
-        contentValuesList.add(videoValues);
-
-        ContentValues[] downloadedVideoContentValues = contentValuesList.toArray(new ContentValues[contentValuesList.size()]);
-        context.getContentResolver().bulkInsert(VideoContract.CONTENT_URI, downloadedVideoContentValues);
-
-    }
 }

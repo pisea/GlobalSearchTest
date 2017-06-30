@@ -55,6 +55,7 @@ import jp.trifort.globalsearchtest.R;
 import jp.trifort.globalsearchtest.manager.provider.VideoProvider;
 import jp.trifort.globalsearchtest.model.Movie;
 import jp.trifort.globalsearchtest.model.MovieList;
+import jp.trifort.globalsearchtest.util.ProviderUtil;
 import jp.trifort.globalsearchtest.view.activity.BrowseErrorActivity;
 import jp.trifort.globalsearchtest.view.activity.DetailsActivity;
 import jp.trifort.globalsearchtest.view.presenter.CardPresenter;
@@ -103,7 +104,7 @@ public class MainFragment extends BrowseFragment {
         List<Movie> list = MovieList.setupMovies();
 
         for (Movie movie : list) {
-            VideoProvider.saveContentProvide(getActivity(), movie);
+            ProviderUtil.saveContentProvide(getActivity(), movie);
         }
 
         mRowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());

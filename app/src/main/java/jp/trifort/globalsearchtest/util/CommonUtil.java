@@ -95,26 +95,4 @@ public class CommonUtil {
         }
         return result;
     }
-
-    /**
-     * Check if there is a global search intent. If there is, load that video.
-     */
-    public static boolean hasGlobalSearchIntent(Activity activity) {
-
-        Intent intent = activity.getIntent();
-        String intentAction = intent.getAction();
-        String globalSearch = activity.getString(R.string.global_search);
-
-        if (globalSearch.equalsIgnoreCase(intentAction)) {
-
-            return true;
-        }
-
-        return false;
-    }
-
-    // Returns the Uri referencing a video with the specified id.
-    public static Uri buildVideoUri(long id) {
-        return ContentUris.withAppendedId(VideoContract.CONTENT_URI, id);
-    }
 }

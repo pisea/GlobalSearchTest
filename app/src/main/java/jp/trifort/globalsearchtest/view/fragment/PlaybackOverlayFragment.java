@@ -60,6 +60,7 @@ import jp.trifort.globalsearchtest.R;
 import jp.trifort.globalsearchtest.model.Movie;
 import jp.trifort.globalsearchtest.model.MovieList;
 import jp.trifort.globalsearchtest.util.CommonUtil;
+import jp.trifort.globalsearchtest.util.ProviderUtil;
 import jp.trifort.globalsearchtest.view.activity.DetailsActivity;
 import jp.trifort.globalsearchtest.view.presenter.CardPresenter;
 
@@ -112,7 +113,7 @@ public class PlaybackOverlayFragment extends android.support.v17.leanback.app.Pl
            movies = MovieList.setupMovies();
         }
 
-        if (CommonUtil.hasGlobalSearchIntent(getActivity())) {
+        if (ProviderUtil.hasGlobalSearchIntent(getActivity())) {
             for (Movie movie : movies) {
                 String movieId = String.valueOf(movie.getId());
                 String episodeId = getActivity().getIntent().getData().getLastPathSegment();
